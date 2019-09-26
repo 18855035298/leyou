@@ -31,12 +31,40 @@ public class BrandController {
         }
         return ResponseEntity.ok(result);
     }
-//    @DeleteMapping("{id}")
-//    public ResponseEntity<PageResult<Brand>> queryBrandByPage(
-//            @RequestParam(value = "id") Long id) {
-//        int result = this.brandService.delItem(id);
-//
-//        return ResponseEntity.ok(result);
-//    }
+    /**
+     * 新增品牌
+     * @param brand
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Void> saveBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
+        this.brandService.saveBrand(brand, cids);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    /**
+     * 修改品牌
+     * @param brand
+     * @return
+     */
+    @PutMapping
+    public ResponseEntity<Void> modeifyBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
+        this.brandService.modifyBrand(brand, cids);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> queryBrandByPage(
+            @PathVariable(value = "id") Long id) {
+        this.brandService.delItem(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("bid/{bid}")
+    public ResponseEntity<List<Category>> querycategoryBybid(
+            @PathVariable(value = "bid", required = false) Long bid) {
+        List<Category> categories = brandService.getCategoryBybid(bid);
+        if (categories != null) {
+            return ResponseEntity.ok(categories);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 }

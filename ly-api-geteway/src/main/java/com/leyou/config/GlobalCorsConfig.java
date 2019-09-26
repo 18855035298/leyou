@@ -20,6 +20,7 @@ public class GlobalCorsConfig {
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PUT");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",config);
         return new CorsFilter(source);
