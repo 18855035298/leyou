@@ -2,3 +2,4 @@
 .idea/
 *.iml
 */src/test
+ly-item/ly-item-service/**/application.yml
